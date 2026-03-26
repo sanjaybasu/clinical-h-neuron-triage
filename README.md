@@ -79,10 +79,10 @@ python 03_evaluate_triage.py       # CPU only
 
 | Model / Condition | Sensitivity | Specificity | MCC |
 |---|---|---|---|
-| GPT-4.1 Safety (best baseline) | 1.000 | 0.950 | 0.970 |
-| Llama-3.1-8B base | 0.409 | 0.691 | 0.095 |
-| Llama-3.1-8B fine-tuned (standard QLoRA) | 0.053 | 0.971 | 0.068 |
-| Base + h-neuron suppression (α=0.5) | 0.386 | 0.650 | 0.028 |
+| GPT-5.1 Safety Prompt (JMIR baseline) | 0.836 | 0.956 | 0.802 |
+| Llama-3.1-8B base | 0.409 | 0.691 | 0.098 |
+| Llama-3.1-8B fine-tuned (standard QLoRA) | 0.053 | 0.971 | 0.054 |
+| Base + h-neuron suppression (α=0.5) | 0.386 | 0.691 | 0.077 |
 
 **Circuit replacement evidence:**
 - Base h-neurons: 213 neurons in layers 10–14 (middle, factual retrieval zone)
