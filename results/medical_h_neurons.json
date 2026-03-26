@@ -1,0 +1,50 @@
+{
+  "medical_h_neurons": [
+    {
+      "layer": 30,
+      "neuron": 13048,
+      "coefficient": 18.164194107055664,
+      "cohen_d": 1.36312688137861
+    },
+    {
+      "layer": 29,
+      "neuron": 9301,
+      "coefficient": 14.005297660827637,
+      "cohen_d": 1.5634730300594215
+    },
+    {
+      "layer": 25,
+      "neuron": 1977,
+      "coefficient": 9.519242286682129,
+      "cohen_d": 1.4084776504750416
+    },
+    {
+      "layer": 23,
+      "neuron": 10425,
+      "coefficient": 8.96953296661377,
+      "cohen_d": 1.415990478434082
+    },
+    {
+      "layer": 27,
+      "neuron": 13331,
+      "coefficient": 1.9125146865844727,
+      "cohen_d": 1.4325509618005663
+    }
+  ],
+  "n_h_neurons": 5,
+  "pct_total": 0.0010899135044642857,
+  "probe_auc": 0.8679214565697446,
+  "probe_auc_sd": 0.035204697208174,
+  "probe_c": 1.0,
+  "n_probe_samples": 1048,
+  "n_appropriate": 786,
+  "n_overcompliant": 262,
+  "triviaqa_comparison": null,
+  "layer_distribution": {
+    "30": 1,
+    "29": 1,
+    "25": 1,
+    "23": 1,
+    "27": 1
+  }
+}

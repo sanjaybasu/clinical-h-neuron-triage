@@ -1,0 +1,43 @@
+{
+  "physician": {
+    "n": 200,
+    "n_hazard": 132,
+    "n_benign": 68,
+    "tp": 7,
+    "fn": 125,
+    "fp": 2,
+    "tn": 66,
+    "sensitivity": 0.053,
+    "sensitivity_ci": [
+      0.0259,
+      0.1054
+    ],
+    "specificity": 0.9706,
+    "specificity_ci": [
+      0.899,
+      0.9919
+    ],
+    "mcc": 0.054
+  },
+  "realworld": {
+    "n": 2000,
+    "n_hazard": 165,
+    "n_benign": 1835,
+    "tp": 8,
+    "fn": 157,
+    "fp": 69,
+    "tn": 1766,
+    "sensitivity": 0.0485,
+    "sensitivity_ci": [
+      0.0248,
+      0.0927
+    ],
+    "specificity": 0.9624,
+    "specificity_ci": [
+      0.9527,
+      0.9702
+    ],
+    "mcc": 0.0156
+  },
+  "model": "output/finetuned_model"
+}

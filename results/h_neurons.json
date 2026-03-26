@@ -1,0 +1,1290 @@
+{
+  "model": "NousResearch/Meta-Llama-3.1-8B-Instruct",
+  "n_layers": 32,
+  "intermediate_size": 14336,
+  "n_samples": 1000,
+  "cv_auc_mean": 0.8916400000000001,
+  "cv_auc_std": 0.01858285231066539,
+  "n_h_neurons": 213,
+  "pct_of_total": 0.04643031529017857,
+  "h_neurons": [
+    {
+      "layer": 23,
+      "neuron": 7855,
+      "feature_type": "prompt",
+      "coefficient": 0.24817063906325337
+    },
+    {
+      "layer": 11,
+      "neuron": 8633,
+      "feature_type": "answer",
+      "coefficient": 0.23141264025303593
+    },
+    {
+      "layer": 5,
+      "neuron": 12287,
+      "feature_type": "answer",
+      "coefficient": 0.2291847611688749
+    },
+    {
+      "layer": 14,
+      "neuron": 13926,
+      "feature_type": "answer",
+      "coefficient": 0.20007201480261644
+    },
+    {
+      "layer": 14,
+      "neuron": 8096,
+      "feature_type": "prompt",
+      "coefficient": 0.1993858879913547
+    },
+    {
+      "layer": 29,
+      "neuron": 5772,
+      "feature_type": "answer",
+      "coefficient": 0.19346394277889373
+    },
+    {
+      "layer": 5,
+      "neuron": 9200,
+      "feature_type": "answer",
+      "coefficient": 0.19053540694437918
+    },
+    {
+      "layer": 3,
+      "neuron": 3884,
+      "feature_type": "answer",
+      "coefficient": 0.18749511505994063
+    },
+    {
+      "layer": 3,
+      "neuron": 3985,
+      "feature_type": "prompt",
+      "coefficient": 0.1818290272129128
+    },
+    {
+      "layer": 19,
+      "neuron": 796,
+      "feature_type": "prompt",
+      "coefficient": 0.17223547481541995
+    },
+    {
+      "layer": 10,
+      "neuron": 6095,
+      "feature_type": "answer",
+      "coefficient": 0.1653064861365042
+    },
+    {
+      "layer": 11,
+      "neuron": 11573,
+      "feature_type": "answer",
+      "coefficient": 0.1588804523045827
+    },
+    {
+      "layer": 31,
+      "neuron": 146,
+      "feature_type": "prompt",
+      "coefficient": 0.15794246410043963
+    },
+    {
+      "layer": 17,
+      "neuron": 14169,
+      "feature_type": "prompt",
+      "coefficient": 0.1550442483543015
+    },
+    {
+      "layer": 11,
+      "neuron": 13621,
+      "feature_type": "answer",
+      "coefficient": 0.14292824179042746
+    },
+    {
+      "layer": 11,
+      "neuron": 13843,
+      "feature_type": "prompt",
+      "coefficient": 0.1424817979026637
+    },
+    {
+      "layer": 6,
+      "neuron": 1941,
+      "feature_type": "answer",
+      "coefficient": 0.14234238650635841
+    },
+    {
+      "layer": 23,
+      "neuron": 1997,
+      "feature_type": "prompt",
+      "coefficient": 0.14213965616153312
+    },
+    {
+      "layer": 12,
+      "neuron": 6192,
+      "feature_type": "answer",
+      "coefficient": 0.13728173358996834
+    },
+    {
+      "layer": 14,
+      "neuron": 1172,
+      "feature_type": "answer",
+      "coefficient": 0.13639795806358865
+    },
+    {
+      "layer": 14,
+      "neuron": 6723,
+      "feature_type": "prompt",
+      "coefficient": 0.13389579600702015
+    },
+    {
+      "layer": 8,
+      "neuron": 8467,
+      "feature_type": "prompt",
+      "coefficient": 0.1307942570741284
+    },
+    {
+      "layer": 28,
+      "neuron": 3405,
+      "feature_type": "answer",
+      "coefficient": 0.12938590151220616
+    },
+    {
+      "layer": 17,
+      "neuron": 6837,
+      "feature_type": "prompt",
+      "coefficient": 0.12716370788165884
+    },
+    {
+      "layer": 9,
+      "neuron": 6229,
+      "feature_type": "answer",
+      "coefficient": 0.1266326840542857
+    },
+    {
+      "layer": 29,
+      "neuron": 2007,
+      "feature_type": "prompt",
+      "coefficient": 0.12572888928770892
+    },
+    {
+      "layer": 15,
+      "neuron": 11138,
+      "feature_type": "prompt",
+      "coefficient": 0.1234681729002624
+    },
+    {
+      "layer": 16,
+      "neuron": 7013,
+      "feature_type": "answer",
+      "coefficient": 0.12302007911620184
+    },
+    {
+      "layer": 13,
+      "neuron": 2149,
+      "feature_type": "answer",
+      "coefficient": 0.12064112199100249
+    },
+    {
+      "layer": 12,
+      "neuron": 8753,
+      "feature_type": "prompt",
+      "coefficient": 0.12041642720092531
+    },
+    {
+      "layer": 10,
+      "neuron": 12216,
+      "feature_type": "answer",
+      "coefficient": 0.11912251460724597
+    },
+    {
+      "layer": 12,
+      "neuron": 7495,
+      "feature_type": "prompt",
+      "coefficient": 0.11644397304960263
+    },
+    {
+      "layer": 17,
+      "neuron": 12957,
+      "feature_type": "prompt",
+      "coefficient": 0.11522487851762124
+    },
+    {
+      "layer": 29,
+      "neuron": 1054,
+      "feature_type": "prompt",
+      "coefficient": 0.11468972813707627
+    },
+    {
+      "layer": 4,
+      "neuron": 3309,
+      "feature_type": "answer",
+      "coefficient": 0.11317503165079565
+    },
+    {
+      "layer": 13,
+      "neuron": 3875,
+      "feature_type": "prompt",
+      "coefficient": 0.11037195119925666
+    },
+    {
+      "layer": 31,
+      "neuron": 5633,
+      "feature_type": "prompt",
+      "coefficient": 0.10990125859616545
+    },
+    {
+      "layer": 11,
+      "neuron": 6853,
+      "feature_type": "prompt",
+      "coefficient": 0.10898648623525617
+    },
+    {
+      "layer": 18,
+      "neuron": 11081,
+      "feature_type": "prompt",
+      "coefficient": 0.10736454592800161
+    },
+    {
+      "layer": 4,
+      "neuron": 6807,
+      "feature_type": "prompt",
+      "coefficient": 0.10454452966339775
+    },
+    {
+      "layer": 9,
+      "neuron": 2034,
+      "feature_type": "prompt",
+      "coefficient": 0.10219674851725437
+    },
+    {
+      "layer": 11,
+      "neuron": 9958,
+      "feature_type": "prompt",
+      "coefficient": 0.10115848392231515
+    },
+    {
+      "layer": 12,
+      "neuron": 2398,
+      "feature_type": "prompt",
+      "coefficient": 0.10043464112385256
+    },
+    {
+      "layer": 7,
+      "neuron": 5143,
+      "feature_type": "prompt",
+      "coefficient": 0.09715887379660663
+    },
+    {
+      "layer": 3,
+      "neuron": 9191,
+      "feature_type": "answer",
+      "coefficient": 0.09707889264703126
+    },
+    {
+      "layer": 12,
+      "neuron": 14105,
+      "feature_type": "prompt",
+      "coefficient": 0.0963457813879872
+    },
+    {
+      "layer": 4,
+      "neuron": 7147,
+      "feature_type": "prompt",
+      "coefficient": 0.0936594411208821
+    },
+    {
+      "layer": 30,
+      "neuron": 11531,
+      "feature_type": "prompt",
+      "coefficient": 0.09153803762188989
+    },
+    {
+      "layer": 8,
+      "neuron": 6298,
+      "feature_type": "prompt",
+      "coefficient": 0.0882327062100722
+    },
+    {
+      "layer": 8,
+      "neuron": 435,
+      "feature_type": "prompt",
+      "coefficient": 0.08443459564028971
+    },
+    {
+      "layer": 12,
+      "neuron": 11525,
+      "feature_type": "prompt",
+      "coefficient": 0.08437598510375625
+    },
+    {
+      "layer": 20,
+      "neuron": 4736,
+      "feature_type": "answer",
+      "coefficient": 0.08405106176111399
+    },
+    {
+      "layer": 24,
+      "neuron": 8058,
+      "feature_type": "prompt",
+      "coefficient": 0.08323379402277911
+    },
+    {
+      "layer": 18,
+      "neuron": 1979,
+      "feature_type": "answer",
+      "coefficient": 0.08198095152340865
+    },
+    {
+      "layer": 9,
+      "neuron": 12750,
+      "feature_type": "prompt",
+      "coefficient": 0.0818326275410675
+    },
+    {
+      "layer": 6,
+      "neuron": 9576,
+      "feature_type": "answer",
+      "coefficient": 0.08171689635993003
+    },
+    {
+      "layer": 10,
+      "neuron": 603,
+      "feature_type": "answer",
+      "coefficient": 0.0809047149221015
+    },
+    {
+      "layer": 11,
+      "neuron": 7817,
+      "feature_type": "answer",
+      "coefficient": 0.08084117043669824
+    },
+    {
+      "layer": 15,
+      "neuron": 5123,
+      "feature_type": "answer",
+      "coefficient": 0.08022600005107054
+    },
+    {
+      "layer": 12,
+      "neuron": 5228,
+      "feature_type": "answer",
+      "coefficient": 0.080175133277662
+    },
+    {
+      "layer": 13,
+      "neuron": 9107,
+      "feature_type": "prompt",
+      "coefficient": 0.07934994905682873
+    },
+    {
+      "layer": 10,
+      "neuron": 12141,
+      "feature_type": "prompt",
+      "coefficient": 0.0787360593178604
+    },
+    {
+      "layer": 12,
+      "neuron": 11628,
+      "feature_type": "answer",
+      "coefficient": 0.07846587706183822
+    },
+    {
+      "layer": 9,
+      "neuron": 8168,
+      "feature_type": "answer",
+      "coefficient": 0.07757066663968254
+    },
+    {
+      "layer": 9,
+      "neuron": 3036,
+      "feature_type": "answer",
+      "coefficient": 0.07719642870257673
+    },
+    {
+      "layer": 14,
+      "neuron": 7926,
+      "feature_type": "prompt",
+      "coefficient": 0.07688897618092179
+    },
+    {
+      "layer": 14,
+      "neuron": 9618,
+      "feature_type": "prompt",
+      "coefficient": 0.0754729615334056
+    },
+    {
+      "layer": 12,
+      "neuron": 8500,
+      "feature_type": "answer",
+      "coefficient": 0.07511962774876332
+    },
+    {
+      "layer": 14,
+      "neuron": 2497,
+      "feature_type": "answer",
+      "coefficient": 0.07448183881510807
+    },
+    {
+      "layer": 20,
+      "neuron": 12680,
+      "feature_type": "answer",
+      "coefficient": 0.07331114565303336
+    },
+    {
+      "layer": 13,
+      "neuron": 3258,
+      "feature_type": "prompt",
+      "coefficient": 0.07325516391125375
+    },
+    {
+      "layer": 10,
+      "neuron": 14246,
+      "feature_type": "prompt",
+      "coefficient": 0.07298933081270638
+    },
+    {
+      "layer": 2,
+      "neuron": 13761,
+      "feature_type": "answer",
+      "coefficient": 0.07270183616780052
+    },
+    {
+      "layer": 14,
+      "neuron": 8989,
+      "feature_type": "prompt",
+      "coefficient": 0.07244527072658344
+    },
+    {
+      "layer": 12,
+      "neuron": 2553,
+      "feature_type": "prompt",
+      "coefficient": 0.0722570203496718
+    },
+    {
+      "layer": 11,
+      "neuron": 5434,
+      "feature_type": "answer",
+      "coefficient": 0.0698565155359196
+    },
+    {
+      "layer": 10,
+      "neuron": 7896,
+      "feature_type": "answer",
+      "coefficient": 0.06914393606433068
+    },
+    {
+      "layer": 30,
+      "neuron": 1869,
+      "feature_type": "prompt",
+      "coefficient": 0.06654406223836055
+    },
+    {
+      "layer": 14,
+      "neuron": 8002,
+      "feature_type": "answer",
+      "coefficient": 0.06470060832634658
+    },
+    {
+      "layer": 18,
+      "neuron": 10285,
+      "feature_type": "prompt",
+      "coefficient": 0.06465745626724817
+    },
+    {
+      "layer": 15,
+      "neuron": 5061,
+      "feature_type": "prompt",
+      "coefficient": 0.06460208581476168
+    },
+    {
+      "layer": 8,
+      "neuron": 12005,
+      "feature_type": "prompt",
+      "coefficient": 0.06432265420848413
+    },
+    {
+      "layer": 6,
+      "neuron": 4262,
+      "feature_type": "prompt",
+      "coefficient": 0.0639047351114959
+    },
+    {
+      "layer": 14,
+      "neuron": 6765,
+      "feature_type": "answer",
+      "coefficient": 0.06369806555098052
+    },
+    {
+      "layer": 11,
+      "neuron": 2920,
+      "feature_type": "prompt",
+      "coefficient": 0.06361550250036567
+    },
+    {
+      "layer": 1,
+      "neuron": 12582,
+      "feature_type": "answer",
+      "coefficient": 0.06297570442960174
+    },
+    {
+      "layer": 15,
+      "neuron": 11684,
+      "feature_type": "answer",
+      "coefficient": 0.06258080474963651
+    },
+    {
+      "layer": 31,
+      "neuron": 1780,
+      "feature_type": "answer",
+      "coefficient": 0.062083327725886345
+    },
+    {
+      "layer": 11,
+      "neuron": 11015,
+      "feature_type": "answer",
+      "coefficient": 0.06185363987431404
+    },
+    {
+      "layer": 11,
+      "neuron": 3536,
+      "feature_type": "prompt",
+      "coefficient": 0.06116143213800933
+    },
+    {
+      "layer": 12,
+      "neuron": 5417,
+      "feature_type": "answer",
+      "coefficient": 0.05878074277692
+    },
+    {
+      "layer": 11,
+      "neuron": 14110,
+      "feature_type": "answer",
+      "coefficient": 0.05863120272296311
+    },
+    {
+      "layer": 17,
+      "neuron": 11901,
+      "feature_type": "answer",
+      "coefficient": 0.058188702632436334
+    },
+    {
+      "layer": 11,
+      "neuron": 10457,
+      "feature_type": "answer",
+      "coefficient": 0.05692654464680001
+    },
+    {
+      "layer": 12,
+      "neuron": 9573,
+      "feature_type": "answer",
+      "coefficient": 0.05683635820197509
+    },
+    {
+      "layer": 15,
+      "neuron": 11853,
+      "feature_type": "prompt",
+      "coefficient": 0.05649900125293886
+    },
+    {
+      "layer": 17,
+      "neuron": 5201,
+      "feature_type": "prompt",
+      "coefficient": 0.05628424010426769
+    },
+    {
+      "layer": 11,
+      "neuron": 10265,
+      "feature_type": "answer",
+      "coefficient": 0.05600814308990203
+    },
+    {
+      "layer": 10,
+      "neuron": 7449,
+      "feature_type": "prompt",
+      "coefficient": 0.055163809054297644
+    },
+    {
+      "layer": 13,
+      "neuron": 5461,
+      "feature_type": "prompt",
+      "coefficient": 0.05495477453639955
+    },
+    {
+      "layer": 26,
+      "neuron": 11274,
+      "feature_type": "prompt",
+      "coefficient": 0.05287473263416127
+    },
+    {
+      "layer": 11,
+      "neuron": 11110,
+      "feature_type": "prompt",
+      "coefficient": 0.05220127859725014
+    },
+    {
+      "layer": 11,
+      "neuron": 2439,
+      "feature_type": "prompt",
+      "coefficient": 0.051376951419715725
+    },
+    {
+      "layer": 7,
+      "neuron": 12157,
+      "feature_type": "answer",
+      "coefficient": 0.05060055050078788
+    },
+    {
+      "layer": 4,
+      "neuron": 1407,
+      "feature_type": "answer",
+      "coefficient": 0.0503831921910852
+    },
+    {
+      "layer": 17,
+      "neuron": 14198,
+      "feature_type": "prompt",
+      "coefficient": 0.05009516922594655
+    },
+    {
+      "layer": 18,
+      "neuron": 12296,
+      "feature_type": "prompt",
+      "coefficient": 0.04983830025913481
+    },
+    {
+      "layer": 11,
+      "neuron": 13560,
+      "feature_type": "answer",
+      "coefficient": 0.04967841518538248
+    },
+    {
+      "layer": 29,
+      "neuron": 7693,
+      "feature_type": "prompt",
+      "coefficient": 0.04961244252986395
+    },
+    {
+      "layer": 30,
+      "neuron": 8359,
+      "feature_type": "prompt",
+      "coefficient": 0.04943318064518695
+    },
+    {
+      "layer": 11,
+      "neuron": 11659,
+      "feature_type": "answer",
+      "coefficient": 0.04925249292633484
+    },
+    {
+      "layer": 11,
+      "neuron": 14123,
+      "feature_type": "answer",
+      "coefficient": 0.04745007835724331
+    },
+    {
+      "layer": 31,
+      "neuron": 6683,
+      "feature_type": "prompt",
+      "coefficient": 0.04664751847094106
+    },
+    {
+      "layer": 17,
+      "neuron": 6978,
+      "feature_type": "answer",
+      "coefficient": 0.04612621528493792
+    },
+    {
+      "layer": 18,
+      "neuron": 7346,
+      "feature_type": "answer",
+      "coefficient": 0.0458436394766024
+    },
+    {
+      "layer": 15,
+      "neuron": 1429,
+      "feature_type": "prompt",
+      "coefficient": 0.045561248952853586
+    },
+    {
+      "layer": 13,
+      "neuron": 5518,
+      "feature_type": "prompt",
+      "coefficient": 0.04554878447009164
+    },
+    {
+      "layer": 29,
+      "neuron": 7970,
+      "feature_type": "answer",
+      "coefficient": 0.04439485375915986
+    },
+    {
+      "layer": 28,
+      "neuron": 5443,
+      "feature_type": "prompt",
+      "coefficient": 0.043738531864616764
+    },
+    {
+      "layer": 14,
+      "neuron": 6436,
+      "feature_type": "prompt",
+      "coefficient": 0.04283382997123712
+    },
+    {
+      "layer": 13,
+      "neuron": 2212,
+      "feature_type": "answer",
+      "coefficient": 0.0422834248957903
+    },
+    {
+      "layer": 10,
+      "neuron": 13052,
+      "feature_type": "answer",
+      "coefficient": 0.042054073937267705
+    },
+    {
+      "layer": 13,
+      "neuron": 4812,
+      "feature_type": "answer",
+      "coefficient": 0.04132411322595106
+    },
+    {
+      "layer": 20,
+      "neuron": 2057,
+      "feature_type": "answer",
+      "coefficient": 0.040931745853573356
+    },
+    {
+      "layer": 12,
+      "neuron": 5455,
+      "feature_type": "prompt",
+      "coefficient": 0.04029986836373427
+    },
+    {
+      "layer": 8,
+      "neuron": 4893,
+      "feature_type": "prompt",
+      "coefficient": 0.04015000346569886
+    },
+    {
+      "layer": 10,
+      "neuron": 13944,
+      "feature_type": "prompt",
+      "coefficient": 0.03986730813699697
+    },
+    {
+      "layer": 12,
+      "neuron": 11021,
+      "feature_type": "answer",
+      "coefficient": 0.039081952452150404
+    },
+    {
+      "layer": 21,
+      "neuron": 9368,
+      "feature_type": "prompt",
+      "coefficient": 0.038785608485198256
+    },
+    {
+      "layer": 13,
+      "neuron": 14047,
+      "feature_type": "answer",
+      "coefficient": 0.036390184835680905
+    },
+    {
+      "layer": 20,
+      "neuron": 225,
+      "feature_type": "prompt",
+      "coefficient": 0.035416685060784464
+    },
+    {
+      "layer": 14,
+      "neuron": 5357,
+      "feature_type": "prompt",
+      "coefficient": 0.0349762757132743
+    },
+    {
+      "layer": 8,
+      "neuron": 2655,
+      "feature_type": "answer",
+      "coefficient": 0.03490916592302695
+    },
+    {
+      "layer": 11,
+      "neuron": 4640,
+      "feature_type": "prompt",
+      "coefficient": 0.03481726621818258
+    },
+    {
+      "layer": 13,
+      "neuron": 8406,
+      "feature_type": "answer",
+      "coefficient": 0.03426502358215702
+    },
+    {
+      "layer": 9,
+      "neuron": 1134,
+      "feature_type": "prompt",
+      "coefficient": 0.034208122049367864
+    },
+    {
+      "layer": 9,
+      "neuron": 1145,
+      "feature_type": "prompt",
+      "coefficient": 0.034078246291407405
+    },
+    {
+      "layer": 14,
+      "neuron": 1755,
+      "feature_type": "prompt",
+      "coefficient": 0.03404989422777513
+    },
+    {
+      "layer": 12,
+      "neuron": 14294,
+      "feature_type": "answer",
+      "coefficient": 0.03366941039881552
+    },
+    {
+      "layer": 12,
+      "neuron": 1960,
+      "feature_type": "prompt",
+      "coefficient": 0.03317882473515987
+    },
+    {
+      "layer": 29,
+      "neuron": 6230,
+      "feature_type": "answer",
+      "coefficient": 0.033060121194403616
+    },
+    {
+      "layer": 8,
+      "neuron": 6182,
+      "feature_type": "answer",
+      "coefficient": 0.032707097836633
+    },
+    {
+      "layer": 30,
+      "neuron": 9887,
+      "feature_type": "prompt",
+      "coefficient": 0.03206689803333139
+    },
+    {
+      "layer": 21,
+      "neuron": 7753,
+      "feature_type": "answer",
+      "coefficient": 0.030933737330819108
+    },
+    {
+      "layer": 14,
+      "neuron": 7803,
+      "feature_type": "answer",
+      "coefficient": 0.03078572413847688
+    },
+    {
+      "layer": 30,
+      "neuron": 12454,
+      "feature_type": "prompt",
+      "coefficient": 0.030001423517827808
+    },
+    {
+      "layer": 11,
+      "neuron": 9432,
+      "feature_type": "answer",
+      "coefficient": 0.029101482462816707
+    },
+    {
+      "layer": 20,
+      "neuron": 11158,
+      "feature_type": "answer",
+      "coefficient": 0.02829606405766943
+    },
+    {
+      "layer": 15,
+      "neuron": 2149,
+      "feature_type": "answer",
+      "coefficient": 0.025932447616922646
+    },
+    {
+      "layer": 7,
+      "neuron": 3870,
+      "feature_type": "prompt",
+      "coefficient": 0.025894981088282018
+    },
+    {
+      "layer": 30,
+      "neuron": 1018,
+      "feature_type": "prompt",
+      "coefficient": 0.025819609958257658
+    },
+    {
+      "layer": 15,
+      "neuron": 748,
+      "feature_type": "answer",
+      "coefficient": 0.02564801553360442
+    },
+    {
+      "layer": 11,
+      "neuron": 4157,
+      "feature_type": "prompt",
+      "coefficient": 0.02519728212594461
+    },
+    {
+      "layer": 11,
+      "neuron": 1350,
+      "feature_type": "prompt",
+      "coefficient": 0.024988455795685083
+    },
+    {
+      "layer": 12,
+      "neuron": 5231,
+      "feature_type": "prompt",
+      "coefficient": 0.024614181828720987
+    },
+    {
+      "layer": 29,
+      "neuron": 2646,
+      "feature_type": "answer",
+      "coefficient": 0.024449228899604734
+    },
+    {
+      "layer": 11,
+      "neuron": 390,
+      "feature_type": "prompt",
+      "coefficient": 0.02422344706895243
+    },
+    {
+      "layer": 14,
+      "neuron": 1868,
+      "feature_type": "answer",
+      "coefficient": 0.023954021252314918
+    },
+    {
+      "layer": 17,
+      "neuron": 7659,
+      "feature_type": "answer",
+      "coefficient": 0.023611111413570283
+    },
+    {
+      "layer": 20,
+      "neuron": 4788,
+      "feature_type": "prompt",
+      "coefficient": 0.023182998750409096
+    },
+    {
+      "layer": 10,
+      "neuron": 4691,
+      "feature_type": "answer",
+      "coefficient": 0.023097540949544096
+    },
+    {
+      "layer": 8,
+      "neuron": 9342,
+      "feature_type": "prompt",
+      "coefficient": 0.02300485686116275
+    },
+    {
+      "layer": 11,
+      "neuron": 14192,
+      "feature_type": "answer",
+      "coefficient": 0.022379515531370648
+    },
+    {
+      "layer": 5,
+      "neuron": 1705,
+      "feature_type": "prompt",
+      "coefficient": 0.022304044886475978
+    },
+    {
+      "layer": 10,
+      "neuron": 8728,
+      "feature_type": "prompt",
+      "coefficient": 0.021068301426787783
+    },
+    {
+      "layer": 12,
+      "neuron": 9141,
+      "feature_type": "answer",
+      "coefficient": 0.02022607861081395
+    },
+    {
+      "layer": 17,
+      "neuron": 5607,
+      "feature_type": "prompt",
+      "coefficient": 0.019441367551611858
+    },
+    {
+      "layer": 31,
+      "neuron": 10542,
+      "feature_type": "answer",
+      "coefficient": 0.019369185901145357
+    },
+    {
+      "layer": 26,
+      "neuron": 12999,
+      "feature_type": "answer",
+      "coefficient": 0.018006637038310916
+    },
+    {
+      "layer": 14,
+      "neuron": 3342,
+      "feature_type": "prompt",
+      "coefficient": 0.0178518317639844
+    },
+    {
+      "layer": 17,
+      "neuron": 8777,
+      "feature_type": "answer",
+      "coefficient": 0.016311147686606724
+    },
+    {
+      "layer": 28,
+      "neuron": 3411,
+      "feature_type": "answer",
+      "coefficient": 0.01615427631332192
+    },
+    {
+      "layer": 30,
+      "neuron": 11154,
+      "feature_type": "prompt",
+      "coefficient": 0.01585187535706549
+    },
+    {
+      "layer": 12,
+      "neuron": 5584,
+      "feature_type": "answer",
+      "coefficient": 0.015770082690997746
+    },
+    {
+      "layer": 12,
+      "neuron": 11958,
+      "feature_type": "answer",
+      "coefficient": 0.014966810805658202
+    },
+    {
+      "layer": 9,
+      "neuron": 3877,
+      "feature_type": "prompt",
+      "coefficient": 0.014913163859452369
+    },
+    {
+      "layer": 27,
+      "neuron": 759,
+      "feature_type": "prompt",
+      "coefficient": 0.014376060835251918
+    },
+    {
+      "layer": 13,
+      "neuron": 13843,
+      "feature_type": "answer",
+      "coefficient": 0.0137170096731198
+    },
+    {
+      "layer": 13,
+      "neuron": 9313,
+      "feature_type": "answer",
+      "coefficient": 0.013407454911523207
+    },
+    {
+      "layer": 7,
+      "neuron": 6227,
+      "feature_type": "answer",
+      "coefficient": 0.013229883232884099
+    },
+    {
+      "layer": 12,
+      "neuron": 1040,
+      "feature_type": "prompt",
+      "coefficient": 0.012984161377256425
+    },
+    {
+      "layer": 20,
+      "neuron": 13899,
+      "feature_type": "answer",
+      "coefficient": 0.012844871902701364
+    },
+    {
+      "layer": 10,
+      "neuron": 3968,
+      "feature_type": "prompt",
+      "coefficient": 0.012411168371787351
+    },
+    {
+      "layer": 11,
+      "neuron": 3327,
+      "feature_type": "prompt",
+      "coefficient": 0.011962262388084916
+    },
+    {
+      "layer": 8,
+      "neuron": 9751,
+      "feature_type": "prompt",
+      "coefficient": 0.011775956819261758
+    },
+    {
+      "layer": 4,
+      "neuron": 10272,
+      "feature_type": "answer",
+      "coefficient": 0.011421382889428943
+    },
+    {
+      "layer": 16,
+      "neuron": 3098,
+      "feature_type": "answer",
+      "coefficient": 0.011418262131777402
+    },
+    {
+      "layer": 14,
+      "neuron": 8397,
+      "feature_type": "prompt",
+      "coefficient": 0.011389460337323905
+    },
+    {
+      "layer": 29,
+      "neuron": 6829,
+      "feature_type": "prompt",
+      "coefficient": 0.010750687878881624
+    },
+    {
+      "layer": 13,
+      "neuron": 2254,
+      "feature_type": "prompt",
+      "coefficient": 0.010681914746510812
+    },
+    {
+      "layer": 20,
+      "neuron": 12546,
+      "feature_type": "answer",
+      "coefficient": 0.00990626418059158
+    },
+    {
+      "layer": 10,
+      "neuron": 8667,
+      "feature_type": "answer",
+      "coefficient": 0.009492766869459338
+    },
+    {
+      "layer": 13,
+      "neuron": 8485,
+      "feature_type": "answer",
+      "coefficient": 0.009037093601485257
+    },
+    {
+      "layer": 3,
+      "neuron": 12486,
+      "feature_type": "prompt",
+      "coefficient": 0.008471981847685328
+    },
+    {
+      "layer": 30,
+      "neuron": 2401,
+      "feature_type": "prompt",
+      "coefficient": 0.008376502452983787
+    },
+    {
+      "layer": 1,
+      "neuron": 1193,
+      "feature_type": "prompt",
+      "coefficient": 0.007861392750009157
+    },
+    {
+      "layer": 14,
+      "neuron": 3075,
+      "feature_type": "prompt",
+      "coefficient": 0.007012020252020027
+    },
+    {
+      "layer": 14,
+      "neuron": 6528,
+      "feature_type": "answer",
+      "coefficient": 0.005843412434150176
+    },
+    {
+      "layer": 7,
+      "neuron": 6519,
+      "feature_type": "prompt",
+      "coefficient": 0.005447350612848784
+    },
+    {
+      "layer": 15,
+      "neuron": 2587,
+      "feature_type": "answer",
+      "coefficient": 0.004950245128883738
+    },
+    {
+      "layer": 16,
+      "neuron": 2588,
+      "feature_type": "prompt",
+      "coefficient": 0.004046777741488464
+    },
+    {
+      "layer": 11,
+      "neuron": 12425,
+      "feature_type": "answer",
+      "coefficient": 0.003947531400851823
+    },
+    {
+      "layer": 14,
+      "neuron": 4557,
+      "feature_type": "answer",
+      "coefficient": 0.003543614868247472
+    },
+    {
+      "layer": 20,
+      "neuron": 14098,
+      "feature_type": "prompt",
+      "coefficient": 0.0032691782405734333
+    },
+    {
+      "layer": 16,
+      "neuron": 9490,
+      "feature_type": "answer",
+      "coefficient": 0.0031657958196862276
+    },
+    {
+      "layer": 21,
+      "neuron": 8237,
+      "feature_type": "prompt",
+      "coefficient": 0.0028092624231749624
+    },
+    {
+      "layer": 29,
+      "neuron": 4321,
+      "feature_type": "prompt",
+      "coefficient": 0.0026540666613112125
+    },
+    {
+      "layer": 23,
+      "neuron": 8367,
+      "feature_type": "answer",
+      "coefficient": 0.002390886513749472
+    },
+    {
+      "layer": 10,
+      "neuron": 4286,
+      "feature_type": "answer",
+      "coefficient": 0.002303957887054831
+    },
+    {
+      "layer": 30,
+      "neuron": 7004,
+      "feature_type": "prompt",
+      "coefficient": 0.0019702283513572533
+    },
+    {
+      "layer": 9,
+      "neuron": 12538,
+      "feature_type": "answer",
+      "coefficient": 0.001871193348448644
+    },
+    {
+      "layer": 31,
+      "neuron": 2204,
+      "feature_type": "answer",
+      "coefficient": 0.0008898142088775377
+    },
+    {
+      "layer": 11,
+      "neuron": 7096,
+      "feature_type": "answer",
+      "coefficient": 0.00062841782185255
+    }
+  ]
+}
