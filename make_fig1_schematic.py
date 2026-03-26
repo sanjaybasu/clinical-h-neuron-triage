@@ -13,7 +13,7 @@ import os, sys, json, base64, io, textwrap
 from pathlib import Path
 from PIL import Image
 
-API_KEY = "REDACTED_API_KEY"
+API_KEY = os.environ.get("GOOGLE_API_KEY", "")  # set GOOGLE_API_KEY in environment
 
 OUTPUT_DIR = Path("/Users/sanjaybasu/waymark-local/notebooks/h_neuron_triage/figures")
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
