@@ -114,10 +114,10 @@ def make_figure(rho_values):
     ax.axvline(mean_rho, color="#3274A1", linestyle="-", linewidth=1.0, alpha=0.7,
                zorder=3, label=f"Mean random ρ = {mean_rho:.3f} (SD {sd_rho:.3f})")
 
-    # Annotation: p-value
-    ax.text(threshold_full - 0.04, ax.get_ylim()[1] if ax.get_ylim()[1] > 0 else 8,
-            f"{n_below_full}/{n_sets} sets\none-sided p = {p_one_sided:.3f}",
-            ha="right", va="top", fontsize=7.5, color="#C4681A",
+    # Annotation: p-value — placed in axes-fraction coords to avoid y-limit timing issues
+    ax.text(0.36, 0.97,
+            f"{n_below_full}/{n_sets} sets ≤ ρ = {threshold_full:.3f}\none-sided p = {p_one_sided:.3f}",
+            transform=ax.transAxes, ha="right", va="top", fontsize=7.5, color="#C4681A",
             bbox=dict(boxstyle="round,pad=0.25", fc="white", ec="#C4681A", alpha=0.9))
 
     ax.set_xlabel("Spearman ρ  (sensitivity vs. α, full range α ∈ {0.0, 1.0, 2.0, 3.0})",
@@ -135,20 +135,16 @@ def make_figure(rho_values):
     ax.spines["right"].set_visible(False)
     ax.grid(axis="y", alpha=0.3, linewidth=0.6)
 
-    legend = ax.legend(fontsize=7.5, framealpha=0.95, loc="upper left",
+    legend = ax.legend(fontsize=7.5, framealpha=0.95, loc="upper right",
                        borderpad=0.5, handlelength=1.5)
-
-    # Footer note
-    fig.text(0.5, -0.04,
-             f"Each set: 213 layer-matched random neurons  ·  {n_sets} of 100 planned sets completed",
-             ha="center", fontsize=7.5, color="#555555", style="italic")
 
     fig.tight_layout()
 
     for out_dir in [OUTPUT_DIR, PKG_DIR]:
-        path = out_dir / "fig8_permutation_rho_distribution.png"
-        fig.savefig(path, dpi=300, bbox_inches="tight", facecolor="white")
-        print(f"Saved: {path}")
+        for ext in ("png", "pdf"):
+            path = out_dir / f"efig5_permutation_rho_distribution.{ext}"
+            fig.savefig(path, dpi=300, bbox_inches="tight", facecolor="white")
+            print(f"Saved: {path}")
 
     plt.close(fig)
     return n_sets, mean_rho, sd_rho, n_below_full, p_one_sided

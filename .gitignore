@@ -6,3 +6,9 @@ __pycache__/
 .env
 *.log
 .modal/
+output_deepseek_backup/
+fill_manuscript_placeholders.py
+run_missing_permutation_sets.py
+run_parallel_map.py
+run_parallel_permutation.py
+update_manuscript_phase6.py

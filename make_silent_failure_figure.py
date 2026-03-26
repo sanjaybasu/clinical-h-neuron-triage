@@ -248,20 +248,19 @@ draw_bracket(ax_a,
              "p<0.0001 ***")
 
 # ---- Relative change annotations ----
-# Sensitivity: 87% decline, placed above FT bar
+# Place text ABOVE the error bar cap (+ small gap) so it never overlaps the whisker
 rel_sens_decline = abs(base_sens - ft_sens) / base_sens * 100
 ax_a.text(
     x_positions[0] + offset,
-    ft_sens + 0.045,
+    ft_sens_ci[1] + 0.05,
     f"down {rel_sens_decline:.0f}% relative",
     ha="center", va="bottom", fontsize=7.5, color=FT_COLOR, fontweight="bold"
 )
 
-# Specificity: 40% increase, placed above base bar
 rel_spec_gain = abs(ft_spec - base_spec) / base_spec * 100
 ax_a.text(
     x_positions[1] - offset,
-    base_spec + 0.045,
+    base_spec_ci[1] + 0.05,
     f"up {rel_spec_gain:.0f}% relative",
     ha="center", va="bottom", fontsize=7.5, color=BASE_COLOR, fontweight="bold"
 )
@@ -373,9 +372,10 @@ ax_b.set_title("Fine-tuning moves in the wrong direction",
 # Gray diamond legend entry
 gray_diamond = mpatches.Patch(facecolor=GRAY, label="Comparison systems")
 handles, labels = ax_b.get_legend_handles_labels()
+# lower-left: fine-tuned model is lower-right (spec~0.97, sens~0.05); arrow is there too
 ax_b.legend(
     handles=[gray_diamond] + handles,
-    loc="lower right",
+    loc="lower left",
     frameon=False,
     fontsize=7.0,
 )

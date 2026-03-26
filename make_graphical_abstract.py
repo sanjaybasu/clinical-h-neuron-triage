@@ -199,8 +199,8 @@ def draw_panel_c(ax):
     ax.text(5.0/10, 0.96, "2×2 factorial — key arms", ha="center", va="top",
             transform=ax.transAxes, fontsize=9, fontweight="bold")
 
-    # Spearman annotation — top right, clear of data
-    ax.text(0.97, 0.97, "ρ = −1.000\n(Arm B, base)",
+    # Spearman annotation — moved to mid-right to avoid overlapping panel title at top
+    ax.text(0.97, 0.82, "ρ = −1.000\n(Arm B, base)",
             transform=ax.transAxes, ha="right", va="top",
             fontsize=7.5, color=BLUE,
             bbox=dict(boxstyle="round,pad=0.3", fc="white", ec=BLUE, alpha=0.9))

@@ -664,6 +664,219 @@ def run_all_random_sets():
     print(f"\nAll {N_RANDOM_SETS} random sets complete.")
 
 
+@app.function(
+    image=image,
+    gpu="A100-80GB",
+    secrets=[hf_secret],
+    timeout=7200,  # 2 hours — one set takes ~45min on A100-80GB
+    volumes={"/results": results_volume, "/model-cache": model_volume},
+    memory=32768,
+)
+def run_one_random_set_v2(set_idx: int):
+    """Run a single random neuron control set — corrected RNG, prompt, and token length.
+
+    Uses identical logic to run_all_random_sets:
+      - rng = np.random.RandomState(42 + set_idx)  (NOT sequential advance from seed 42)
+      - tokenizer.apply_chat_template()             (NOT raw text prompt)
+      - max_new_tokens=256                          (NOT 150)
+    """
+    import sys
+    import numpy as np
+    import torch
+    from torch.nn import functional as F
+    from collections import Counter
+    import transformers
+
+    os.chdir("/app")
+    os.environ["HF_HOME"] = "/model-cache"
+    os.environ["TRANSFORMERS_CACHE"] = "/model-cache"
+    os.makedirs("output", exist_ok=True)
+
+    # Skip if already done
+    vol_path = Path(f"/results/output/random_set_{set_idx}.json")
+    if vol_path.exists():
+        print(f"Set {set_idx} already completed, skipping.")
+        return {"set_idx": set_idx, "status": "skipped"}
+
+    # Load h-neurons
+    shutil.copy("/results/output/h_neurons.json", "output/h_neurons.json")
+    with open("output/h_neurons.json") as f:
+        h_neurons = json.load(f)["h_neurons"]
+
+    # Load test cases
+    with open("data/physician_test.json") as f:
+        cases = json.load(f)
+    print(f"Set {set_idx}: {len(h_neurons)} h-neurons, {len(cases)} cases")
+
+    # Generate random neurons — CORRECT: independent seed per set_idx
+    N_LAYERS = 32
+    NEURONS_PER_LAYER = 14336
+    rng = np.random.RandomState(42 + set_idx)
+    layer_counts = Counter(hn["layer"] for hn in h_neurons)
+    random_neurons = []
+    for layer, count in layer_counts.items():
+        h_in_layer = set(hn["neuron"] for hn in h_neurons if hn["layer"] == layer)
+        available = [n for n in range(NEURONS_PER_LAYER) if n not in h_in_layer]
+        chosen = rng.choice(available, size=count, replace=False)
+        for n in chosen:
+            random_neurons.append({"layer": layer, "neuron": int(n)})
+    print(f"  Generated {len(random_neurons)} random neurons")
+
+    # Load model
+    MODEL_ID = "unsloth/Llama-3.1-8B-Instruct"
+    print(f"Loading model {MODEL_ID}...")
+    tokenizer = transformers.AutoTokenizer.from_pretrained(MODEL_ID)
+    tokenizer.pad_token_id = tokenizer.eos_token_id
+    model = transformers.AutoModelForCausalLM.from_pretrained(
+        MODEL_ID, torch_dtype=torch.bfloat16, device_map="auto",
+    )
+    model.eval()
+    device = next(model.parameters()).device
+    print("Model loaded.")
+
+    sys.path.insert(0, "/app")
+    from config import SYSTEM_PROMPT, SAFETY_HINT, EMERGENCY_KEYWORDS, URGENT_KEYWORDS
+
+    def build_chat_prompt(message):
+        msgs = [
+            {"role": "system", "content": SYSTEM_PROMPT + SAFETY_HINT},
+            {"role": "user", "content": f"Patient message: {message}"},
+        ]
+        return tokenizer.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True)
+
+    def parse_response(text):
+        text_lower = text.lower()
+        if any(kw in text_lower for kw in EMERGENCY_KEYWORDS):
+            return {"detection": 1, "severity": "Emergent"}
+        if any(kw in text_lower for kw in URGENT_KEYWORDS):
+            return {"detection": 1, "severity": "Urgent"}
+        return {"detection": 0, "severity": "Benign"}
+
+    original_forwards = {}
+
+    def apply_ablation(neurons, alpha):
+        restore_ablation()
+        layer_map = {}
+        for rn in neurons:
+            layer_map.setdefault(rn["layer"], []).append(rn["neuron"])
+        for layer_idx, neuron_indices in layer_map.items():
+            mlp = model.model.layers[layer_idx].mlp
+            original_forwards[layer_idx] = mlp.forward
+            idx_t = torch.tensor(sorted(set(neuron_indices)), dtype=torch.long, device=device)
+            def make_patched(orig_mlp, idx, a):
+                def patched(x):
+                    gate = orig_mlp.gate_proj(x)
+                    up = orig_mlp.up_proj(x)
+                    act = F.silu(gate) * up
+                    act[:, :, idx] = act[:, :, idx] * a
+                    return orig_mlp.down_proj(act)
+                return patched
+            mlp.forward = make_patched(mlp, idx_t, alpha)
+
+    def restore_ablation():
+        for li, fwd in original_forwards.items():
+            model.model.layers[li].mlp.forward = fwd
+        original_forwards.clear()
+
+    ALPHAS = [0.0, 1.0, 2.0, 3.0]
+    results = []
+    for alpha in ALPHAS:
+        print(f"  Alpha = {alpha}")
+        apply_ablation(random_neurons, alpha)
+        for i, case in enumerate(cases):
+            message = case.get("message", case.get("prompt", ""))
+            prompt = build_chat_prompt(message)
+            inputs = tokenizer(prompt, return_tensors="pt", truncation=True, max_length=2048).to(device)
+            with torch.no_grad():
+                output = model.generate(
+                    **inputs, max_new_tokens=256, do_sample=False,
+                    pad_token_id=tokenizer.eos_token_id,
+                )
+            response = tokenizer.decode(output[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
+            parsed = parse_response(response)
+            results.append({
+                "set_idx": set_idx,
+                "case_index": i,
+                "alpha": alpha,
+                "detection_truth": case.get("detection_truth", 0),
+                "detection_pred": parsed["detection"],
+                "response": response[:200],
+            })
+        restore_ablation()
+        print(f"    Done: {len([r for r in results if r['alpha'] == alpha])} cases")
+
+    # Save to volume
+    vol_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(str(vol_path), "w") as f:
+        json.dump(results, f, indent=2)
+    results_volume.commit()
+    print(f"  Saved set {set_idx} ({len(results)} results) to volume")
+    return {"set_idx": set_idx, "n_results": len(results), "status": "done"}
+
+
+@app.local_entrypoint()
+def run_parallel_random_sets():
+    """Spawn one run_one_random_set_v2 container per missing set (fire-and-forget)."""
+    import subprocess
+    import time
+
+    # Determine completed sets from volume via CLI
+    try:
+        out = subprocess.check_output(
+            ["modal", "volume", "ls", "h-neuron-results-v3", "output"],
+            text=True, stderr=subprocess.DEVNULL,
+        )
+        completed = set()
+        for line in out.splitlines():
+            if "random_set_" in line:
+                try:
+                    idx = int(line.strip().split("random_set_")[1].replace(".json", "").split()[0])
+                    completed.add(idx)
+                except (ValueError, IndexError):
+                    pass
+    except Exception as e:
+        print(f"[WARN] Could not read volume listing: {e}. Using empty completed set.")
+        completed = set()
+
+    missing = [i for i in range(100) if i not in completed]
+    if not missing:
+        print("All 100 sets already complete.")
+        return
+
+    print(f"Spawning {len(missing)} parallel jobs for sets: {missing}")
+    handles = {}
+    for idx in missing:
+        h = run_one_random_set_v2.spawn(idx)
+        handles[idx] = h
+        print(f"  Spawned set {idx}: {h.object_id}")
+
+    print(f"\nAll {len(missing)} jobs live on Modal. Polling for completion...")
+    done = set()
+    errors = set()
+    while len(done) + len(errors) < len(missing):
+        for idx, h in list(handles.items()):
+            if idx in done or idx in errors:
+                continue
+            try:
+                h.get(timeout=10)
+                done.add(idx)
+                print(f"  [DONE] set {idx} ({len(done)}/{len(missing)})")
+            except Exception as e:
+                if "TimeoutError" in type(e).__name__:
+                    pass
+                else:
+                    errors.add(idx)
+                    print(f"  [ERROR] set {idx}: {e}")
+        remaining = len(missing) - len(done) - len(errors)
+        if remaining > 0:
+            print(f"  Status: {len(done)} done, {len(errors)} errors, {remaining} running...")
+            time.sleep(30)
+
+    print(f"\nComplete: {len(done)}/{len(missing)} succeeded, {len(errors)} failed.")
+    if errors:
+        print(f"Failed sets: {sorted(errors)}")
+
+
 # ===========================================================================
 # NEW PHASES: Fine-tuning + Medical h-neuron + 2x2 Ablation
 # ===========================================================================
