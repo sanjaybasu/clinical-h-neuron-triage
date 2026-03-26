@@ -153,7 +153,6 @@ Fields include `message`, `hazard_detection` (ground truth), `esi_level`, and cl
 @article{basu2026clinical,
   title={Clinical fine-tuning silently replaces the safety circuit in language models, catastrophically impairing emergency detection},
   author={Basu, Sanjay and Patel, Sadiq Y and Sheth, Parth and Muralidharan, Bhairavi and Elamaran, Namrata and Kinra, Aakriti and Kharwadkar, Sagar and Farhat-Sabet, Ryan and Morgan, John and Batniji, Rajaie},
-  note={Under review},
   year={2026},
   note={Under review}
 }
