@@ -3,7 +3,7 @@
 Code and data for:
 
 > **"Clinical fine-tuning silently replaces the safety circuit in language models, impairing emergency detection"**
-> Basu S, Patel SY, Sheth P, Muralidharan B, Elamaran N, Kinra A, Kharwadkar S, Farhat-Sabet R, Morgan J, Batniji R. *Nature Medicine* (under review), 2026.
+> Basu S, Patel SY, Sheth P, Muralidharan B, Elamaran N, Kinra A, Kharwadkar S, Farhat-Sabet R, Morgan J, Batniji R. Under review, 2026.
 
 ## Overview
 
@@ -75,7 +75,6 @@ Fine-tuning created 5 new h-neurons in layers 23–30 (output-adjacent) with zer
 @article{basu2026clinical,
   title={Clinical fine-tuning silently replaces the safety circuit in language models, impairing emergency detection},
   author={Basu, Sanjay and Patel, Sadiq Y and Sheth, Parth and Muralidharan, Bhairavi and Elamaran, Namrata and Kinra, Aakriti and Kharwadkar, Sagar and Farhat-Sabet, Ryan and Morgan, John and Batniji, Rajaie},
-  journal={Nature Medicine},
   year={2026},
   note={Under review}
 }
