@@ -12,3 +12,10 @@ run_missing_permutation_sets.py
 run_parallel_map.py
 run_parallel_permutation.py
 update_manuscript_phase6.py
+
+# Results, figures, and data — kept locally, not tracked in git
+output/
+results/
+tables/
+figures/
+data/
