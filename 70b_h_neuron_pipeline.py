@@ -95,7 +95,7 @@ N_COMPLETIONS = 5
 TEMPERATURE = 1.0
 TOP_K = 50
 TOP_P = 0.9
-N_PER_CLASS = 500
+N_PER_CLASS = 200
 CONSISTENCY_THRESHOLD = 0.8
 
 # Logit lens token groups
@@ -427,6 +427,7 @@ def run_70b_phase1():
         "70b_triviaqa_checkpoint.json",
         "70b_triviaqa_samples.json",
         "70b_cett_features.npz",
+        "70b_cett_features_partial.npz",
         "70b_h_neurons.json",
     ])
 
@@ -527,7 +528,7 @@ def _generate_triviaqa_samples_70b(model, tokenizer, output_dir: Path) -> list[d
         answers = row["answer"]["aliases"] + [row["answer"]["value"]]
         answers = list(set(a.lower().strip() for a in answers))
         questions.append({"question": q, "answers": answers})
-        if len(questions) >= 5000:
+        if len(questions) >= 2000:
             break
     print(f"Loaded {len(questions)} TriviaQA questions")
 
@@ -647,6 +648,22 @@ def _compute_cett_features_70b(model, tokenizer, samples: list[dict],
     n_features = 2 * n_layers * intermediate_size
     X = np.zeros((len(samples), n_features), dtype=np.float32)
 
+    # Resume from partial checkpoint if available
+    start_sample_idx = 0
+    partial_path = Path("output/70b_cett_features_partial.npz")
+    if partial_path.exists():
+        try:
+            partial_data = np.load(partial_path)
+            n_done = int(partial_data.get("completed", 0))
+            if n_done > 0 and n_done <= len(samples):
+                X[:n_done] = partial_data["X"][:n_done]
+                start_sample_idx = n_done
+                print(f"Resumed CETT from partial checkpoint: {n_done}/{len(samples)} samples already done")
+                sys.stdout.flush()
+        except Exception as e:
+            print(f"Could not load partial CETT checkpoint: {e}. Starting from scratch.")
+
+
     # Precompute down_proj weight norms for each layer
     print("Precomputing down_proj weight norms...")
     down_proj_norms = []
@@ -662,7 +679,9 @@ def _compute_cett_features_70b(model, tokenizer, samples: list[dict],
 
     first_device = next(model.parameters()).device
 
-    for sample_idx, sample in enumerate(tqdm(samples, desc="Computing CETT")):
+    for sample_idx, sample in enumerate(tqdm(samples[start_sample_idx:], desc="Computing CETT",
+                                              initial=start_sample_idx, total=len(samples))):
+        sample_idx = sample_idx + start_sample_idx  # Adjust for resume offset
         prompt_text = sample["prompt"]
         full_text = prompt_text + sample["completion"]
 
@@ -731,14 +750,16 @@ def _compute_cett_features_70b(model, tokenizer, samples: list[dict],
             print(f"  Processed {sample_idx + 1}/{len(samples)} samples")
             sys.stdout.flush()
 
-        # Periodic save of partial features (every 200 samples) for preemption resilience
-        if (sample_idx + 1) % 200 == 0:
+        # Periodic save of partial features (every 50 samples) for preemption resilience
+        if (sample_idx + 1) % 50 == 0:
             try:
                 partial_path = Path("output/70b_cett_features_partial.npz")
                 y_partial = np.array([s["label"] for s in samples[:sample_idx + 1]])
                 np.savez_compressed(partial_path, X=X[:sample_idx + 1], y=y_partial,
                                     completed=sample_idx + 1)
                 print(f"  Partial checkpoint: {sample_idx + 1} samples saved")
+                sys.stdout.flush()
+                _save_to_volume()
             except Exception as e:
                 print(f"  Partial save warning: {e}")
 
@@ -1502,3 +1523,88 @@ def _analyze_decision_locking(results_by_alpha: dict, n_layers: int) -> dict:
         }
 
     return analysis
+
+
+# ===========================================================================
+# Model preload utility (run once to cache model weights to volume)
+# ===========================================================================
+@app.function(
+    image=image,
+    gpu="A100-80GB:2",
+    secrets=[hf_secret],
+    timeout=7200,  # 2 hours — enough for 70B download
+    volumes={"/results": results_volume, "/model-cache": model_volume},
+    memory=196608,
+)
+def preload_model():
+    """Download Llama-3.1-70B-Instruct to the model cache volume.
+
+    Run this once before phase1 to avoid download overhead inside the timed function.
+    """
+    import torch
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+
+    os.environ["HF_HOME"] = "/model-cache"
+    os.environ["TRANSFORMERS_CACHE"] = "/model-cache"
+
+    print(f"Downloading {MODEL_ID} to /model-cache ...")
+    t0 = time.time()
+
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+    model = AutoModelForCausalLM.from_pretrained(
+        MODEL_ID,
+        torch_dtype=torch.bfloat16,
+        device_map="auto",
+    )
+    print(f"Model downloaded and loaded in {time.time() - t0:.1f}s")
+    print(f"Architecture: {model.config.num_hidden_layers} layers, "
+          f"intermediate_size={model.config.intermediate_size}")
+
+    # Quick smoke test
+    from transformers import pipeline
+    prompt = "The capital of France is"
+    inputs = tokenizer(prompt, return_tensors="pt").to(next(model.parameters()).device)
+    with torch.no_grad():
+        out = model.generate(**inputs, max_new_tokens=5, do_sample=False)
+    print(f"Smoke test: '{tokenizer.decode(out[0], skip_special_tokens=True)}'")
+
+    model_volume.commit()
+    print("Model cached to volume. Ready for phase1.")
+
+
+# ===========================================================================
+# Local entrypoint: spawn phases sequentially with --detach support
+# ===========================================================================
+@app.local_entrypoint()
+def main(phase: str = "all"):
+    """Spawn 70B pipeline phases.
+
+    Usage:
+        modal run 70b_h_neuron_pipeline.py           # run all phases
+        modal run 70b_h_neuron_pipeline.py --phase preload
+        modal run 70b_h_neuron_pipeline.py --phase phase1
+        modal run 70b_h_neuron_pipeline.py --phase phase2
+        modal run 70b_h_neuron_pipeline.py --phase phase3
+
+    For detached (background) runs, use:
+        modal run --detach 70b_h_neuron_pipeline.py --phase phase1
+    """
+    if phase in ("preload", "all"):
+        print("Running preload_model...")
+        preload_model.remote()
+        print("Preload complete.")
+
+    if phase in ("phase1", "all"):
+        print("Running run_70b_phase1...")
+        run_70b_phase1.remote()
+        print("Phase 1 complete.")
+
+    if phase in ("phase2", "all"):
+        print("Running run_70b_ablation...")
+        run_70b_ablation.remote()
+        print("Phase 2 complete.")
+
+    if phase in ("phase3", "all"):
+        print("Running run_70b_logit_lens...")
+        run_70b_logit_lens.remote()
+        print("Phase 3 complete.")
